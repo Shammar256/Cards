@@ -1,0 +1,45 @@
+from django.shortcuts import render
+
+from Cards.forms import FeesStructureForm, TuitionPaymentForm
+
+from Cards.models import FeesStructure, TuitionPayment
+def index_view(request):
+    return render(request, 'index.html')
+
+def add_feesstructure_view(request):
+    if request.method == "POST":
+        feesstructure_form = FeesStructureForm(request.POST)
+
+        if feesstructure_form.is_valid():
+            feesstructure_form.save()
+
+    else:
+        feesstructure_form = FeesStructureForm()
+
+    context = {
+        'form' : feesstructure_form,
+    }
+
+    return render(request, "add_feesstructure.html", context)
+
+def add_tuitionpayment_view(request):
+    if request.method == "POST":
+        tuitionpayment_form = TuitionPaymentForm(request.POST)
+
+        if tuitionpayment_form.is_valid():
+            tuitionpayment_form.save()
+
+    else:
+        tuitionpayment_form = TuitionPaymentForm()
+
+    context = {
+        'form' : tuitionpayment_form,
+
+    }
+    return render(request, "add_tuitionpayment.html", context)
+
+
+
+         
+
+
